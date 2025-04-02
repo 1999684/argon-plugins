@@ -127,6 +127,31 @@ function afl_display_friend_links($atts) {
     
     $output .= '</div>'; // .afl-container
     
+    // 添加PJAX支持的脚本
+    $output .= '<script>
+    (function(){
+        function initFriendLinksAnimation() {
+            // 这里可以添加任何需要在页面加载时执行的友链相关JS
+            // 例如：添加动画效果、事件监听等
+            console.log("友链卡片已加载");
+        }
+        
+        // 页面首次加载时执行
+        initFriendLinksAnimation();
+        
+        // 为PJAX添加支持
+        if (typeof window.pjaxLoaded !== "function") {
+            window.pjaxLoaded = initFriendLinksAnimation;
+        } else {
+            var originalPjaxLoaded = window.pjaxLoaded;
+            window.pjaxLoaded = function() {
+                originalPjaxLoaded();
+                initFriendLinksAnimation();
+            };
+        }
+    })();
+    </script>';
+    
     return $output;
 }
 add_shortcode('argon_friend_links', 'afl_display_friend_links'); // 注册短代码
@@ -285,9 +310,62 @@ function afl_enqueue_styles() {
         $version
     );
     
-    // 不在这里直接加载，而是在短代码使用时加载
+    // 直接加载样式，不再依赖短代码检测
+    wp_enqueue_style('afl-style');
 }
 add_action('wp_enqueue_scripts', 'afl_enqueue_styles');
+
+// 添加内联样式以应用每行卡片数设置
+function afl_add_inline_styles() {
+    $cards_per_row = get_option('afl_cards_per_row', 3);
+    $custom_css = "
+        .afl-links-grid {
+            grid-template-columns: repeat({$cards_per_row}, 1fr) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .afl-links-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .afl-links-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    ";
+    
+    wp_add_inline_style('afl-style', $custom_css);
+}
+add_action('wp_enqueue_scripts', 'afl_add_inline_styles', 20); // 提高优先级，确保在主样式后加载
+
+// 添加PJAX支持的全局脚本
+function afl_add_pjax_support() {
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 如果页面包含友链卡片，初始化它们
+        if (document.querySelector('.afl-container')) {
+            if (typeof window.pjaxLoaded === 'function') {
+                window.pjaxLoaded();
+            }
+        }
+    });
+    
+    // 为PJAX加载添加全局事件监听
+    document.addEventListener('pjax:complete', function() {
+        // PJAX加载完成后，检查是否有友链容器
+        if (document.querySelector('.afl-container')) {
+            if (typeof window.pjaxLoaded === 'function') {
+                window.pjaxLoaded();
+            }
+        }
+    });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'afl_add_pjax_support');
 
 // 创建默认头像文件
 function afl_create_default_avatar() {
@@ -371,30 +449,8 @@ function afl_clear_cache_on_settings_change($old_value, $new_value) {
 add_action('update_option_afl_cache_time', 'afl_clear_cache_on_settings_change', 10, 2);
 add_action('update_option_afl_cards_per_row', 'afl_clear_cache_on_settings_change', 10, 2);
 
-// 添加内联样式以应用每行卡片数设置
-function afl_add_inline_styles() {
-    $cards_per_row = get_option('afl_cards_per_row', 3);
-    $custom_css = "
-        .afl-links-grid {
-            grid-template-columns: repeat({$cards_per_row}, 1fr) !important;
-        }
-        
-        @media (max-width: 768px) {
-            .afl-links-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .afl-links-grid {
-                grid-template-columns: 1fr !important;
-            }
-        }
-    ";
-    
-    wp_add_inline_style('afl-style', $custom_css);
-}
-add_action('wp_enqueue_scripts', 'afl_add_inline_styles');
+// 删除这里的重复函数定义
+// 不要再次定义 afl_add_inline_styles 函数
 
 // 添加链接更新时的钩子
 function afl_clear_cache_on_link_update() {
