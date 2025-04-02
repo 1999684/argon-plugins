@@ -1,0 +1,138 @@
+.afl-container {
+    margin: 2rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.afl-section {
+    margin-bottom: 2rem;
+}
+
+.afl-section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+}
+
+.afl-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+}
+
+.afl-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.afl-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+}
+
+.afl-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.afl-card a {
+    display: flex;
+    padding: 1rem;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+}
+
+.afl-card-avatar {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+}
+
+.afl-card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.afl-card:hover .afl-card-avatar img {
+    border-color: #4776E6;
+    transform: scale(1.05) rotate(360deg);
+    transition: all 0.5s ease;
+}
+
+.afl-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.afl-card-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+.afl-card-description {
+    font-size: 0.9rem;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .afl-links-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .afl-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 根据设置调整每行卡片数 */
+.afl-links-grid[data-cards-per-row="1"] {
+    grid-template-columns: 1fr;
+}
+
+.afl-links-grid[data-cards-per-row="2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.afl-links-grid[data-cards-per-row="3"] {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.afl-links-grid[data-cards-per-row="4"] {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.afl-links-grid[data-cards-per-row="5"] {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.afl-links-grid[data-cards-per-row="6"] {
+    grid-template-columns: repeat(6, 1fr);
+}
