@@ -124,7 +124,7 @@ function afl_display_friend_links($atts) {
         $output .= '</div>'; // .afl-links-grid
         $output .= '</div>'; // .afl-section
     }
-    
+    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-friends-rss">ZTGD</a>制作</p>';
     $output .= '</div>'; // .afl-container
     
     // 添加PJAX支持的脚本
@@ -448,9 +448,6 @@ function afl_clear_cache_on_settings_change($old_value, $new_value) {
 }
 add_action('update_option_afl_cache_time', 'afl_clear_cache_on_settings_change', 10, 2);
 add_action('update_option_afl_cards_per_row', 'afl_clear_cache_on_settings_change', 10, 2);
-
-// 删除这里的重复函数定义
-// 不要再次定义 afl_add_inline_styles 函数
 
 // 添加链接更新时的钩子
 function afl_clear_cache_on_link_update() {

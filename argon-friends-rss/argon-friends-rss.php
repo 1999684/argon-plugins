@@ -133,6 +133,7 @@ function afr_display_rss_feed() {
     }
     
     $output .= '</div>';
+    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-friends-rss">ZTGD</a>制作</p>';
     $output .= '</div>';
     return $output;
 }
