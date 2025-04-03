@@ -52,22 +52,22 @@
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    color: #666;
+    color: #837b7b;
     font-size: 0.8rem; /* 减小字体大小 */
 }
 
 .afr-item-source {
-    color: #0066cc;
+    color: #c2e0fd;
     font-weight: 500;
 }
 
 .afr-item-date {
-    color: #888;
+    color: #a3a3a3;
 }
 
 /* 添加分隔符 */
 .afr-item-source::after {
     content: "•";
     margin-left: 0.5rem;
-    color: #ccc;
+    color: #cccccc;
 }

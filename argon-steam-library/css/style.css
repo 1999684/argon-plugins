@@ -1,0 +1,118 @@
+.asl-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.asl-games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 修改为每行4个 */
+    gap: 15px; /* 减小间距以适应更多卡片 */
+    margin-bottom: 30px;
+}
+
+.asl-game-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 0;
+    padding-bottom: 46.74%; /* 修改为 460:215 的比例 (215/460*100%) */
+}
+
+.asl-game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.asl-game-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.asl-game-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.asl-game-info {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.asl-game-card:hover .asl-game-info {
+    opacity: 1;
+}
+
+.asl-game-name {
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.asl-game-playtime {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    z-index: 2;
+}
+
+.asl-load-more {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.asl-load-more-btn {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+
+.asl-load-more-btn:hover {
+    background: #357abd;
+}
+
+.asl-load-more-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .asl-games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .asl-games-grid {
+        grid-template-columns: 1fr;
+    }
+}
