@@ -87,7 +87,7 @@ function afl_display_friend_links($atts) {
     
     // 确定要显示的友链类型
     $types_to_show = ($atts['type'] == 'all') ? 
-        array('blogroll', 'bilateral', 'unilateral') : 
+        array('bilateral', 'unilateral', 'blogroll') : // 修改了顺序：双向、单向、博客圈
         array($atts['type']);
     
     foreach ($types_to_show as $type) {
@@ -97,9 +97,9 @@ function afl_display_friend_links($atts) {
         
         // 获取分类名称
         $category_names = array(
-            'blogroll' => '博客圈',
             'bilateral' => '双向友链',
-            'unilateral' => '单向友链'
+            'unilateral' => '单向友链',
+            'blogroll' => '博客圈'
         );
         
         $output .= '<div class="afl-section">';
@@ -124,7 +124,7 @@ function afl_display_friend_links($atts) {
         $output .= '</div>'; // .afl-links-grid
         $output .= '</div>'; // .afl-section
     }
-    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-friends-rss">ZTGD</a>制作</p>';
+    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-plugins">ZTGD</a>制作</p>';
     $output .= '</div>'; // .afl-container
     
     // 添加PJAX支持的脚本

@@ -135,7 +135,7 @@ function asl_display_steam_library($atts) {
     }
     
     $output .= '</div>';
-    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-friends-rss">ZTGD</a>制作</p>';
+    $output .= '<p style="text-align: center;font-size:15px;font-color: #96CDCD">该插件由<a href="https://github.com/1999684/argon-plugins">ZTGD</a>制作</p>';
     if ($games_data['has_more']) {
         $output .= '<div class="asl-load-more"><button class="asl-load-more-btn">加载更多</button></div>';
     }
