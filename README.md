@@ -98,7 +98,7 @@ Argon 友链卡片展示是一个为 WordPress Argon 主题设计的插件，用
 
 ### 插件介绍
 
-Argon Steam 游戏库是一个为 WordPress Argon 主题设计的插件，用于在网站上展示您的 Steam 游戏库。插件支持卡片式布局和加载更多功能，让您可以炫耀自己的游戏收藏和游戏时长。
+Argon Steam 游戏库是一个为 WordPress Argon 主题设计的插件，用于在网站上展示您的 Steam 游戏库。插件支持卡片式布局和加载更多功能。
 
 ### 主要功能
 
