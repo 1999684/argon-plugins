@@ -103,6 +103,29 @@
             gap: 20px;
             align-items: center;
         }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #24292e;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .github-button:hover {
+            background-color: #2c974b;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .github-button svg path {
+            fill: white;
+        }
         
         /* 个人头像样式 */
         .profile-image {
@@ -255,6 +278,17 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            #contact-icons {
+                position: static !important;
+                margin-top: 20px;
+            }
+        }
+        
+        /* 联系方式图标悬停效果 */
+        #contact-icons a:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 1);
         }
     </style>
 </head>
@@ -301,6 +335,40 @@
             <div class="description" id="content-description">
                 请从左侧下拉菜单选择一个选项，查看相关内容。
             </div>
+            
+            <!-- 添加GitHub项目链接 -->
+            <div id="github-link-container" style="display: none; margin-top: 15px;">
+                <a id="github-link" href="#" target="_blank" class="github-button">
+                    <svg height="20" width="20" viewBox="0 0 16 16" style="vertical-align: middle; margin-right: 5px;">
+                        <path fill="white" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                    查看GitHub项目
+                </a>
+            </div>
+
+            <!-- 添加联系方式图标区域 -->
+            <div id="contact-icons" style="position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: center; gap: 15px;">
+                <a href="mailto:<?php echo isset($data['settings']['email']) ? $data['settings']['email'] : 'example@example.com'; ?>" title="发送邮件" style="display: inline-block; width: 36px; height: 36px; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s, background-color 0.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="#e74c3c" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" onclick="copyToClipboard('<?php echo isset($data['settings']['qq']) ? $data['settings']['qq'] : '123456789'; ?>', 'QQ号已复制到剪贴板')" title="点击复制QQ号" style="display: inline-block; width: 36px; height: 36px; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s, background-color 0.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="#3498db" d="M12.5,1C18,1,22.1,5.1,22.1,10.5c0,5.4-4.1,9.5-9.6,9.5c-0.5,0-1.1,0-1.6-0.1c-0.5,0.2-1.6,0.7-3.8,1.7 c-0.4,0.2-0.9-0.2-0.7-0.6c0.4-1,0.7-1.8,0.8-2.6C4.8,16.9,3,14,3,10.5C3,5.1,7.1,1,12.5,1z M12.5,3C8.4,3,5,6.3,5,10.5 c0,2.8,1.5,5.2,3.8,6.4c0.3,0.2,0.5,0.5,0.4,0.9c-0.1,0.4-0.2,0.8-0.3,1.2c0.7-0.3,1.3-0.5,1.8-0.7c0.3-0.1,0.6-0.1,0.9,0 c0.3,0.1,0.6,0.1,0.9,0.1c4.1,0,7.5-3.3,7.5-7.5C20,6.3,16.6,3,12.5,3z"/>
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" onclick="copyToClipboard('<?php echo isset($data['settings']['wechat']) ? $data['settings']['wechat'] : 'my_wechat'; ?>', '微信号已复制到剪贴板')" title="点击复制微信号" style="display: inline-block; width: 36px; height: 36px; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s, background-color 0.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="#25D366" d="M8.5,14.1c-0.5,0-0.9-0.4-0.9-0.9c0-0.5,0.4-0.9,0.9-0.9c0.5,0,0.9,0.4,0.9,0.9C9.4,13.7,9,14.1,8.5,14.1z M12,14.1c-0.5,0-0.9-0.4-0.9-0.9c0-0.5,0.4-0.9,0.9-0.9c0.5,0,0.9,0.4,0.9,0.9C12.9,13.7,12.5,14.1,12,14.1z M16,11.4c0.5,0,0.9,0.4,0.9,0.9c0,0.5-0.4,0.9-0.9,0.9c-0.5,0-0.9-0.4-0.9-0.9C15.1,11.8,15.5,11.4,16,11.4z M19.5,11.4c0.5,0,0.9,0.4,0.9,0.9c0,0.5-0.4,0.9-0.9,0.9c-0.5,0-0.9-0.4-0.9-0.9C18.6,11.8,19,11.4,19.5,11.4z M21.7,15.4c0-3.8-3.8-6.8-8.5-6.8c-4.7,0-8.5,3-8.5,6.8c0,3.8,3.8,6.8,8.5,6.8c1,0,2-0.1,2.9-0.4l2.6,1.5c-0.7-2.1,0-2.3,0-2.3l0.1-0.1C20.3,19.3,21.7,17.5,21.7,15.4z M13.2,2c-5.4,0-9.8,3.7-9.8,8.2c0,2.4,1.2,4.6,3.1,6.1l-0.8,2.4c0,0-0.1,0.4,0.3,0.4c0.2,0,0.4-0.1,0.4-0.1l2.9-1.6c1.2,0.3,2.5,0.5,3.8,0.5c0.4,0,0.9,0,1.3-0.1c-0.5-1.1-0.8-2.4-0.8-3.7C13.7,8.5,18,4.1,23,4.1c0.4,0,0.9,0,1.3,0.1C22.8,3.7,18.3,2,13.2,2z"/>
+                    </svg>
+                </a>
+                <a href="<?php echo isset($data['settings']['personal_website']) ? $data['settings']['personal_website'] : 'https://example.com'; ?>" title="访问个人网站" target="_blank" style="display: inline-block; width: 36px; height: 36px; background-color: rgba(255, 255, 255, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: transform 0.3s, background-color 0.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="#007bb5" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,4c1.38,0,2.64,0.4,3.75,1.05 c-0.24,0.31-0.44,0.67-0.53,1.08c-0.27,1.25,0.07,2.5,0.98,3.44c0.54,0.55,0.98,1.21,1.14,1.96c0.23,1.04,0.02,2.15-0.61,3.03 c-0.79,1.08-2.09,1.68-3.44,1.53c-1.13-0.13-2.13-0.76-2.69-1.76c-0.36-0.65-0.53-1.38-0.54-2.12c-0.01-1.25,0.5-2.43,1.42-3.26 c0.59-0.54,1.25-0.97,1.91-1.38c0.36-0.22,0.73-0.46,0.99-0.79c0.16-0.2,0.27-0.43,0.3-0.68c0.02-0.25-0.07-0.49-0.21-0.69 c-0.23-0.32-0.58-0.53-0.96-0.62c-0.48-0.12-0.95,0.01-1.35,0.27C12.1,4.8,12.05,4.83,12,4.86V4z M6.69,7.06 C7.38,6.5,8.13,6.05,8.95,5.75C9.24,6.06,9.65,6.27,10.1,6.36c0.74,0.14,1.48-0.02,2.08-0.44c0.09,0.12,0.17,0.25,0.24,0.38 c0.21,0.4,0.29,0.86,0.21,1.31c-0.09,0.53-0.39,0.99-0.77,1.34c-0.86,0.8-1.96,1.3-2.92,2.02c-0.6,0.44-1.12,0.97-1.49,1.59 c-0.67,1.12-0.85,2.43-0.62,3.7c0.29,1.57,1.2,2.96,2.49,3.93c-2.05-0.76-3.71-2.34-4.58-4.31C3.97,14.25,4.28,10.33,6.69,7.06z M16.55,7.33c0.17,0.21,0.33,0.44,0.47,0.68c0.35,0.59,0.6,1.24,0.72,1.92c0.18,1.02,0.09,2.08-0.27,3.06 c-0.45,1.22-1.3,2.28-2.37,3.06c-0.56,0.4-1.18,0.72-1.85,0.93c-0.74,0.24-1.52,0.34-2.3,0.3c0.83-0.4,1.56-0.98,2.11-1.71 c0.91-1.22,1.2-2.8,0.89-4.28c-0.22-1.04-0.81-1.98-1.66-2.69c-0.4-0.33-0.85-0.6-1.33-0.83c0.63-0.19,1.28-0.29,1.94-0.29 C14.08,7.48,15.37,7.79,16.55,7.33z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
         
         <div class="right-section">
@@ -312,11 +380,15 @@
             </div>
         </div>
     </div>
+    <p style="text-align: center; font-size: 15px; color:rgb(4, 19, 6); position: fixed; bottom: 10px; left: 0; right: 0; margin: 0 auto; z-index: 10;">该插件由<a href="https://github.com/1999684/argon-plugins" style="color: #6495ED;">ZTGD</a>制作</p>
 
     <script>
         // 初始数据
         let contentData = <?php echo json_encode($data); ?>;
-
+        
+        // 调试输出
+        console.log('加载的数据:', contentData);
+        
         // 确保默认内容存在
         if (!contentData.identity.default) {
             contentData.identity.default = {
@@ -342,6 +414,7 @@
             const descriptionElement = document.getElementById('content-description');
             const imageElement = document.getElementById('content-image');
             const articleElement = document.getElementById('content-article');
+            const githubLinkContainer = document.getElementById('github-link-container');
             
             // 使用默认身份内容初始化页面
             const defaultData = contentData.identity.default;
@@ -349,7 +422,19 @@
             descriptionElement.textContent = defaultData.description;
             imageElement.src = defaultData.image;
             imageElement.alt = defaultData.title;
-            articleElement.textContent = defaultData.article;
+            
+            // 清除文章元素中的文本节点
+            Array.from(articleElement.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    articleElement.removeChild(node);
+                }
+            });
+            
+            // 添加新的文本节点作为第一个子节点
+            articleElement.insertBefore(document.createTextNode(defaultData.article), articleElement.firstChild);
+            
+            // 初始化时隐藏GitHub链接
+            githubLinkContainer.style.display = 'none';
             
             // 更新下拉菜单按钮文本
             document.getElementById('identity-btn').textContent = '我的身份';
@@ -470,14 +555,44 @@
             const articleElement = document.getElementById('content-article');
             const identityBtn = document.getElementById('identity-btn');
             const projectBtn = document.getElementById('project-btn');
+            const githubLinkContainer = document.getElementById('github-link-container');
+            const githubLink = document.getElementById('github-link');
             
             const data = contentData[type][value];
+            
+            // 详细调试信息
+            console.log('更新内容类型:', type);
+            console.log('更新内容键值:', value);
+            console.log('数据对象:', data);
+            console.log('GitHub用户名:', data.github_username);
+            console.log('GitHub仓库名:', data.github_repo);
             
             titleElement.textContent = data.title;
             descriptionElement.textContent = data.description;
             imageElement.src = data.image;
             imageElement.alt = data.title;
-            articleElement.textContent = data.article;
+            
+            // 更新文章内容
+            if (articleElement.childNodes[0] && articleElement.childNodes[0].nodeType === Node.TEXT_NODE) {
+                articleElement.childNodes[0].nodeValue = data.article;
+            } else {
+                articleElement.textContent = data.article;
+            }
+            
+            // 处理GitHub链接
+            if (type === 'project' && data.github_username && data.github_repo) {
+                const repoUrl = `https://github.com/${data.github_username}/${data.github_repo}`;
+                githubLink.href = repoUrl;
+                githubLinkContainer.style.display = 'block';
+                console.log('显示GitHub链接:', repoUrl);
+            } else {
+                githubLinkContainer.style.display = 'none';
+                console.log('隐藏GitHub链接, 原因:', 
+                    type !== 'project' ? '不是项目类型' : 
+                    !data.github_username ? '缺少用户名' : 
+                    !data.github_repo ? '缺少仓库名' : 
+                    '用户名或仓库名为空');
+            }
             
             // 更新按钮文本
             if (type === 'identity') {
@@ -485,6 +600,69 @@
             } else if (type === 'project') {
                 projectBtn.textContent = data.title;
             }
+        }
+
+        function copyToClipboard(text, message) {
+            // 创建一个临时的textarea元素
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';  // 防止滚动到页面底部
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                // 执行复制命令
+                const successful = document.execCommand('copy');
+                
+                // 显示提示信息
+                if (successful) {
+                    showToast(message);
+                } else {
+                    showToast('复制失败，请手动复制');
+                }
+            } catch (err) {
+                showToast('复制失败，请手动复制');
+                console.error('复制失败:', err);
+            }
+            
+            // 移除临时元素
+            document.body.removeChild(textarea);
+        }
+        
+        function showToast(message) {
+            // 检查是否已存在toast元素，如果有则移除
+            const existingToast = document.getElementById('copy-toast');
+            if (existingToast) {
+                document.body.removeChild(existingToast);
+            }
+            
+            // 创建toast元素
+            const toast = document.createElement('div');
+            toast.id = 'copy-toast';
+            toast.textContent = message;
+            toast.style.position = 'fixed';
+            toast.style.bottom = '30px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '4px';
+            toast.style.zIndex = '1000';
+            toast.style.transition = 'opacity 0.3s';
+            
+            // 添加到页面
+            document.body.appendChild(toast);
+            
+            // 3秒后自动消失
+            setTimeout(function() {
+                toast.style.opacity = '0';
+                setTimeout(function() {
+                    if (document.body.contains(toast)) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
         }
     </script>
 </body>

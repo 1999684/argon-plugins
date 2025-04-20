@@ -56,6 +56,25 @@
                 <p class="description">设置显示在左侧的个人头像</p>
             </div>
             
+            <!-- 添加联系信息设置 -->
+            <div class="form-group">
+                <label for="email">电子邮箱</label>
+                <input type="email" id="email" class="regular-text" value="<?php echo isset($data['settings']['email']) ? $data['settings']['email'] : 'example@example.com'; ?>">
+                <p class="description">设置您的联系邮箱</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="qq">QQ号码</label>
+                <input type="text" id="qq" class="regular-text" value="<?php echo isset($data['settings']['qq']) ? $data['settings']['qq'] : '123456789'; ?>">
+                <p class="description">设置您的QQ号码</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="wechat">微信号</label>
+                <input type="text" id="wechat" class="regular-text" value="<?php echo isset($data['settings']['wechat']) ? $data['settings']['wechat'] : 'my_wechat'; ?>">
+                <p class="description">设置您的微信号</p>
+            </div>
+            
             <div class="form-group">
                 <label for="personal-website">个人网站</label>
                 <input type="url" id="personal-website" class="regular-text" value="<?php echo isset($data['settings']['personal_website']) ? $data['settings']['personal_website'] : 'https://example.com'; ?>" required>
@@ -178,6 +197,18 @@
                 <label for="project-description">简短描述</label>
                 <textarea id="project-description" class="large-text" rows="3" required></textarea>
             </div>
+
+            <div class="form-group">
+                <label for="project-github-username">GitHub用户名</label>
+                <input type="text" id="project-github-username" class="regular-text">
+                <p class="description">项目的GitHub用户名（可选）</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="project-github-repo">GitHub仓库名</label>
+                <input type="text" id="project-github-repo" class="regular-text">
+                <p class="description">项目的GitHub仓库名（可选）</p>
+            </div>
             
             <div class="form-group">
                 <label for="project-image">图片路径</label>
@@ -211,6 +242,9 @@
                 background_image: '<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/images/default.jpg'; ?>',
                 left_bg_image: '<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/images/left-bg.jpg'; ?>',
                 profile_image: '<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/images/avatar.jpg'; ?>',
+                email: 'email',
+                qq: 'qq',
+                wechat: 'wechat',
                 personal_website: 'https://example.com'
             };
         } else {
@@ -223,6 +257,15 @@
             }
             if (!contentData.settings.profile_image) {
                 contentData.settings.profile_image = '<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/images/avatar.jpg'; ?>';
+            }
+            if (!contentData.settings.email) {
+                contentData.settings.email = 'email'; 
+            }
+            if (!contentData.settings.qq) {
+                contentData.settings.qq = 'qq'; 
+            }
+            if (!contentData.settings.wechat) {
+                contentData.settings.wechat = 'wechat'; 
             }
             if (!contentData.settings.personal_website) {
                 contentData.settings.personal_website = 'https://example.com';
@@ -290,6 +333,8 @@
                 $('#project-image').val('<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/images/default.jpg'; ?>');
                 $('#project-article').val('');
                 $('#project-modal').addClass('active');
+                $('#project-github-username').val('');
+                $('#project-github-repo').val('');
             });
             
             // 关闭模态框事件
@@ -331,12 +376,21 @@
                 const description = $('#project-description').val();
                 const image = $('#project-image').val();
                 const article = $('#project-article').val();
+                const github_username = $('#project-github-username').val();
+                const github_repo = $('#project-github-repo').val();
+                
+                // 调试信息
+                console.log('保存项目数据:', {
+                    title, description, image, article, github_username, github_repo
+                });
                 
                 contentData.project[key] = {
                     title,
                     description,
                     image,
-                    article
+                    article,
+                    github_username,
+                    github_repo
                 };
                 
                 saveData();
@@ -367,6 +421,9 @@
                     background_image: backgroundImage,
                     left_bg_image: leftBgImage,
                     profile_image: $('#profile-image').val(),
+                    email: $('#email').val(),
+                    qq: $('#qq').val(),
+                    wechat: $('#wechat').val(),
                     personal_website: $('#personal-website').val()
                 };
                 
@@ -383,7 +440,7 @@
                     title: defaultProjectTitle,
                     description: defaultProjectDescription,
                     image: defaultProjectImage,
-                    article: defaultProjectArticle
+                    article: defaultProjectArticle,
                 };
                 
                 saveData();
@@ -496,6 +553,13 @@
                 $('#project-description').val(item.description);
                 $('#project-image').val(item.image);
                 $('#project-article').val(item.article);
+                
+                // 兼容两种字段名称格式
+                const githubUsername = item.github_username || item.githubUsername || '';
+                const githubRepo = item.github_repo || item.githubRepo || '';
+                
+                $('#project-github-username').val(githubUsername);
+                $('#project-github-repo').val(githubRepo);
                 
                 $('#project-modal').addClass('active');
             });

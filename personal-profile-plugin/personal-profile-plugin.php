@@ -185,25 +185,29 @@ class Personal_Profile_Plugin {
     }
     
     /**
-     * 保存个人资料数据
+     * 保存个人资料数据（AJAX处理）
      */
     public function save_personal_profile_data() {
-        // 检查安全性
-        check_ajax_referer('personal_profile_nonce', 'nonce');
+        // 验证nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'personal_profile_nonce')) {
+            wp_send_json_error('安全验证失败');
+        }
         
-        // 检查权限
+        // 验证用户权限
         if (!current_user_can('manage_options')) {
             wp_send_json_error('权限不足');
         }
         
         // 获取并清理数据
-        $data = isset($_POST['data']) ? $this->sanitize_data($_POST['data']) : array();
+        $data = isset($_POST['data']) ? $_POST['data'] : array();
+        
+        // 调试信息
+        error_log('接收到的数据: ' . print_r($data, true));
         
         // 保存数据
         update_option($this->option_name, $data);
         
-        // 返回成功响应
-        wp_send_json_success('数据保存成功');
+        wp_send_json_success('数据已保存');
     }
     
     /**
@@ -235,7 +239,9 @@ class Personal_Profile_Plugin {
                     'title' => sanitize_text_field($project['title']),
                     'description' => wp_kses_post($project['description']),
                     'image' => esc_url_raw($project['image']),
-                    'article' => wp_kses_post($project['article'])
+                    'article' => wp_kses_post($project['article']),
+                    'github_username' => sanitize_text_field($project['github_username']),
+                    'github_repo' => sanitize_text_field($project['github_repo'])
                 );
             }
         }
@@ -246,7 +252,10 @@ class Personal_Profile_Plugin {
                 'background_image' => esc_url_raw($data['settings']['background_image']),
                 'left_bg_image' => esc_url_raw($data['settings']['left_bg_image']),
                 'profile_image' => esc_url_raw($data['settings']['profile_image']),
-                'personal_website' => esc_url_raw($data['settings']['personal_website'])
+                'personal_website' => esc_url_raw($data['settings']['personal_website']),
+                'email' => sanitize_email($data['settings']['email']),
+                'qq' => sanitize_text_field($data['settings']['qq']),
+                'wechat' => sanitize_text_field($data['settings']['wechat']),
             );
         }
         
