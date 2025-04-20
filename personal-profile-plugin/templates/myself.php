@@ -277,7 +277,7 @@
             <div class="dropdown-container">
                 <!-- 添加个人头像图片 -->
                 <div class="profile-image">
-                    <a href="<?php echo isset($data['settings']['personal_website']) ? $data['settings']['personal_website'] : 'https://example.com'; ?>" target="_blank" title="访问我的个人网站">
+                    <a href="javascript:void(0);" onclick="window.location.href='<?php echo isset($data['settings']['personal_website']) ? $data['settings']['personal_website'] : 'https://example.com'; ?>'" title="访问我的个人网站">
                         <img src="<?php echo isset($data['settings']['profile_image']) ? $data['settings']['profile_image'] : plugin_dir_url(dirname(__FILE__)) . 'assets/images/avatar.jpg'; ?>" alt="个人头像">
                     </a>
                 </div>
