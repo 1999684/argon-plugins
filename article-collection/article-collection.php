@@ -271,8 +271,8 @@ function article_collection_add_page() {
                     // 更新现有文章
                     $data['categories'][$cat_index]['articles'][$edit_article_index] = $new_article;
                 } else {
-                    // 添加新文章
-                    $data['categories'][$cat_index]['articles'][] = $new_article;
+                    // 添加新文章到数组开头，而不是末尾
+                    array_unshift($data['categories'][$cat_index]['articles'], $new_article);
                 }
                 
                 break;
