@@ -1,0 +1,148 @@
+.movie-record-admin .card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.movie-record-admin .instruction .instruction-content {
+    line-height: 1.6;
+}
+
+.movie-record-admin .instruction code {
+    background: #f0f0f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, monospace;
+}
+
+.movie-record-admin .instruction h3 {
+    margin: 1.5em 0 1em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.movie-record-admin .instruction h4 {
+    margin: 1.2em 0 0.8em;
+}
+
+.movie-record-admin .instruction ul,
+.movie-record-admin .instruction ol {
+    margin-left: 2em;
+}
+
+.movie-record-admin .instruction li {
+    margin-bottom: 0.8em;
+}
+
+.movie-record-admin .form-group {
+    margin-bottom: 15px;
+}
+
+.movie-record-admin .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.movie-record-admin .form-group input[type="text"],
+.movie-record-admin .form-group input[type="url"],
+.movie-record-admin .form-group select {
+    width: 100%;
+    max-width: 400px;
+}
+
+.movie-record-admin .poster-upload {
+    margin-top: 10px;
+}
+
+.movie-record-admin #poster-preview,
+.movie-record-admin #edit-poster-preview {
+    margin: 10px 0;
+    max-width: 200px;
+}
+
+.movie-record-admin #poster-preview img,
+.movie-record-admin #edit-poster-preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+.movie-record-admin .record-list table img {
+    max-width: 60px;
+    height: auto;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #666;
+}
+
+/* 表格样式优化 */
+.movie-record-admin .wp-list-table th {
+    font-weight: 600;
+}
+
+.movie-record-admin .wp-list-table td {
+    vertical-align: middle;
+}
+
+.movie-record-admin .wp-list-table .action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* 筛选区域样式 */
+.movie-record-admin .tablenav {
+    margin: 15px 0;
+}
+
+.movie-record-admin .tablenav select {
+    margin-right: 8px;
+}
+
+/* 响应式优化 */
+@media screen and (max-width: 782px) {
+    .movie-record-admin .form-group input[type="text"],
+    .movie-record-admin .form-group input[type="url"],
+    .movie-record-admin .form-group select {
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
